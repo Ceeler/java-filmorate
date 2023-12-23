@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.User;
 
-import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +12,6 @@ import java.util.Map;
 @Service
 @Slf4j
 public class UserService {
-
-//    private final Map<Long, User> users = new HashMap<>(){{
-//        put(1L, new User(1, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13)));
-//        put(2L, new User(2, "new@ya.ru", "Newbie", "Новичок", LocalDate.of(2013, 7, 22)));
-//    }};
 
     private final Map<Long, User> users = new HashMap<>();
     private static long userSequence = 1;

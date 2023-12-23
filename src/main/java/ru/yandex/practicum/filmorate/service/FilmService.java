@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.Film;
 
 import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -14,11 +13,6 @@ import java.util.*;
 public class FilmService {
 
     private static final LocalDate MIN_FILM_DATE = LocalDate.of(1895, 12, 28);
-
-//    private final Map<Long, Film> films = new HashMap<>(){{
-//        put(1L, new Film(1, "Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124));
-//        put(2L, new Film(2, "Челюсти","Фильм об акуле", LocalDate.of(2023, 11, 2), 93));
-//    }};
 
     private final Map<Long, Film> films = new HashMap<>();
 
