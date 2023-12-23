@@ -1,8 +1,10 @@
 package ru.yandex.practicum.filmorate.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.User;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class UserService {
 
     private final Map<Long, User> users = new HashMap<>(){{
@@ -31,18 +34,21 @@ public class UserService {
         return new ArrayList<>(users.values());
     }
 
-    public User addUser(User user) {
+    public User addUser(@Valid User user) {
+        log.info("addUser user={}", user);
         final long id = userSequence++;
         user.setId(id);
         users.put(id, user);
         return user;
     }
 
-    public void updateUser(User user, long id) {
+    public User updateUser(@Valid User user, long id) {
+        log.info("updateUser user={}", user);
         if (!users.containsKey(id)) {
             throw new IllegalArgumentException();
         }
         user.setId(id);
         users.put(id, user);
+        return user;
     }
 }

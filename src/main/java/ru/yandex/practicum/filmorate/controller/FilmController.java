@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.entity.Film;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/film")
 @AllArgsConstructor
+@Slf4j
 public class FilmController {
 
     private final FilmService filmService;
@@ -29,12 +31,14 @@ public class FilmController {
 
     @PostMapping
     public ResponseEntity<Film> addFilm(@RequestBody Film film) {
+        log.info("POST addFilm body={}", film);
         return ResponseEntity.ok(filmService.addFilm(film));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Message> updateFilm(@RequestBody Film film, @PathParam("id") long id) {
-        filmService.updateFilm(film, id);
-        return ResponseEntity.ok(new Message("Обновлено"));
+    public ResponseEntity<Film> updateFilm(@RequestBody Film film, @PathParam("id") long id) {
+        log.info("PUT updateFilm body={}", film);
+        Film response = filmService.updateFilm(film, id);
+        return ResponseEntity.ok(response);
     }
 }

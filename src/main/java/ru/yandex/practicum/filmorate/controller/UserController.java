@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.entity.Film;
@@ -8,12 +9,14 @@ import ru.yandex.practicum.filmorate.model.entity.User;
 import ru.yandex.practicum.filmorate.model.response.Message;
 import ru.yandex.practicum.filmorate.service.UserService;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -29,14 +32,16 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
+        log.info("POST addUser body={}", user);
         return ResponseEntity.ok(userService.addUser(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Message> updateUser(@RequestBody User user, @PathParam("id") long id) {
-        userService.updateUser(user, id);
-        return ResponseEntity.ok(new Message("Обновлено"));
+    public ResponseEntity<User> updateUser(@Valid @RequestBody User user, @PathParam("id") long id) {
+        log.info("PUT updateUser body={}", user);
+        User response = userService.updateUser(user, id);
+        return ResponseEntity.ok(response);
     }
     
 }
