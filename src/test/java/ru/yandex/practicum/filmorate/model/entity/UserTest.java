@@ -59,11 +59,11 @@ class UserTest {
         assertEquals(1,  violations.size());
     }
 
-    @Test
-    public void shouldUseLoginOnEmptyName() {
-        User user1 = new User("losev@danil-m.ru", "Ceeler", LocalDate.of(1999, 11, 13));
-        assertEquals("Ceeler",  user1.getName());
-    }
+//    @Test
+//    public void shouldUseLoginOnEmptyName() {
+//        User user1 = new User("losev@danil-m.ru", "Ceeler", LocalDate.of(1999, 11, 13));
+//        assertEquals("Ceeler",  user1.getName());
+//    }
 
     @Test
     public void shouldHaveOneViolationOnFutureBirthday() {

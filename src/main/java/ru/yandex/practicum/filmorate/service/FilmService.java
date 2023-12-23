@@ -15,12 +15,14 @@ public class FilmService {
 
     private static final LocalDate MIN_FILM_DATE = LocalDate.of(1895, 12, 28);
 
-    private final Map<Long, Film> films = new HashMap<>(){{
-        put(1L, new Film(1, "Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124));
-        put(2L, new Film(2, "Челюсти","Фильм об акуле", LocalDate.of(2023, 11, 2), 93));
-    }};
+//    private final Map<Long, Film> films = new HashMap<>(){{
+//        put(1L, new Film(1, "Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124));
+//        put(2L, new Film(2, "Челюсти","Фильм об акуле", LocalDate.of(2023, 11, 2), 93));
+//    }};
 
-    private static long filmSequence = 2;
+    private final Map<Long, Film> films = new HashMap<>();
+
+    private static long filmSequence = 1;
 
 
     public Film getFilmById(long id) {
@@ -46,15 +48,15 @@ public class FilmService {
         return film;
     }
 
-    public Film updateFilm(Film film, long id) {
+    public Film updateFilm(Film film) {
         log.info("updateFilm film={}", film);
+        final long id = film.getId();
         if (MIN_FILM_DATE.isAfter(film.getReleaseDate())) {
             throw new ConstraintViolationException("Фильм не может быть создан раньше 28 декабря 1895 года", null);
         }
         if (!films.containsKey(id)) {
             throw new IllegalArgumentException();
         }
-        film.setId(id);
         films.put(id, film);
         return film;
     }

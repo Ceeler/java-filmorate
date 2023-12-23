@@ -8,11 +8,12 @@ import ru.yandex.practicum.filmorate.model.entity.Film;
 import ru.yandex.practicum.filmorate.model.response.Message;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("/film")
+@RequestMapping("/films")
 @AllArgsConstructor
 @Slf4j
 public class FilmController {
@@ -30,15 +31,16 @@ public class FilmController {
     }
 
     @PostMapping
-    public ResponseEntity<Film> addFilm(@RequestBody Film film) {
+    public ResponseEntity<Film> addFilm(@Valid @RequestBody Film film) {
         log.info("POST addFilm body={}", film);
         return ResponseEntity.ok(filmService.addFilm(film));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Film> updateFilm(@RequestBody Film film, @PathParam("id") long id) {
+    //@PutMapping("/{id}")
+    @PutMapping
+    public ResponseEntity<Film> updateFilm(@Valid @RequestBody Film film) {
         log.info("PUT updateFilm body={}", film);
-        Film response = filmService.updateFilm(film, id);
+        Film response = filmService.updateFilm(film);
         return ResponseEntity.ok(response);
     }
 }
