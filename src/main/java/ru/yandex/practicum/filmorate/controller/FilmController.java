@@ -25,21 +25,26 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Film> getFilmById(@PathParam("id") long id) {
-        return ResponseEntity.ok(filmService.getFilmById(id));
+    public ResponseEntity<Film> getFilmById(@PathVariable("id") long id) {
+        log.info("Пришел Get запрос /films");
+        Film response = filmService.getFilmById(id);
+        log.info("Отправлен ответ Get /films с телом: {}", response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
     public ResponseEntity<Film> addFilm(@Valid @RequestBody Film film) {
-        log.info("POST addFilm body={}", film);
-        return ResponseEntity.ok(filmService.addFilm(film));
+        log.info("Пришел Post запрос /films с телом: {}", film);
+        Film response = filmService.addFilm(film);
+        log.info("Отправлен ответ Post /films с телом: {}", response);
+        return ResponseEntity.ok(response);
     }
 
-    //@PutMapping("/{id}")
     @PutMapping
     public ResponseEntity<Film> updateFilm(@Valid @RequestBody Film film) {
-        log.info("PUT updateFilm body={}", film);
+        log.info("Пришел Put запрос /films с телом: {}", film);
         Film response = filmService.updateFilm(film);
+        log.info("Отправлен ответ Put /films с телом: {}", response);
         return ResponseEntity.ok(response);
     }
 }

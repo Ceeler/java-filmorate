@@ -25,20 +25,25 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+        log.info("Пришел Get запрос /users");
+        User response = userService.getUserById(id);
+        log.info("Отправлен ответ Get /users с телом: {}", response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-        log.info("POST addUser body={}", user);
-        return ResponseEntity.ok(userService.addUser(user));
+        log.info("Пришел Post запрос /users с телом: {}", user);
+        User response = userService.addUser(user);
+        log.info("Отправлен ответ Post /users с телом: {}", response);
+        return ResponseEntity.ok(response);
     }
 
-   // @PutMapping("/{id}")
     @PutMapping
     public ResponseEntity<User> updateUser(@Valid @RequestBody User user) {
-        log.info("PUT updateUser body={}", user);
+        log.info("Пришел Put запрос /users с телом: {}", user);
         User response = userService.updateUser(user);
+        log.info("Отправлен ответ Put /users с телом: {}", response);
         return ResponseEntity.ok(response);
     }
 }

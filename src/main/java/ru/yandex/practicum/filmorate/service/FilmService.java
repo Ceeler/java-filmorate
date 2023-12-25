@@ -16,7 +16,7 @@ public class FilmService {
 
     private final Map<Long, Film> films = new HashMap<>();
 
-    private static long filmSequence = 1;
+    private long filmSequence = 1;
 
 
     public Film getFilmById(long id) {
