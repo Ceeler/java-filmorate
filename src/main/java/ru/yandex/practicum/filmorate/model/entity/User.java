@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -25,10 +27,19 @@ public class User {
     @Pattern(regexp = "^[a-zA-Z]{4,16}$", message = "Некорректный никнейм")
     private String login;
 
-
     private String name;
 
     @Past(message = "День рождения не может быть в будущей дате")
     private LocalDate birthday;
+
+    private Set<User> friends = new HashSet<>();
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public void removeFriend(User friend) {
+        friends.remove(friend);
+    }
 
 }
