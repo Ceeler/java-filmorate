@@ -1,8 +1,7 @@
 package ru.yandex.practicum.filmorate.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,6 +9,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
@@ -32,7 +32,10 @@ public class User {
     @Past(message = "День рождения не может быть в будущей дате")
     private LocalDate birthday;
 
-    private Set<User> friends = new HashSet<>();
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<User> friends = new LinkedHashSet<>();
 
     public void addFriend(User friend) {
         friends.add(friend);
@@ -42,4 +45,12 @@ public class User {
         friends.remove(friend);
     }
 
+//    public User(long id, String email, String login, String name, LocalDate birthday, Set<User> friends) {
+//        this.id = id;
+//        this.email = email;
+//        this.login = login;
+//        this.name = name;
+//        this.birthday = birthday;
+//        this.friends = new HashSet<>();
+//    }
 }

@@ -6,6 +6,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -28,7 +30,7 @@ public class Film {
     @Positive
     private Integer duration;
 
-    private Set<User> likes;
+    private Set<User> likes = new LinkedHashSet<>();
 
     public void addLike(User user) {
         likes.add(user);

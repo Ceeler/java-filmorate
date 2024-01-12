@@ -34,7 +34,7 @@ public class InMemoryUserStorage implements UserStorage {
         final long id = entity.getId();
         User user = store.get(id);
         if (user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Пользователь с ID=" + id + " не найден");
         }
         store.put(id, entity);
         return entity;
@@ -44,7 +44,7 @@ public class InMemoryUserStorage implements UserStorage {
     public User delete(Long id) {
         User user = store.get(id);
         if (user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Пользователь с ID=" + id + " не найден");
         }
         store.remove(id);
         return user;
