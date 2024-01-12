@@ -3,16 +3,16 @@ package ru.yandex.practicum.filmorate.model.storage;
 import java.util.List;
 import java.util.Optional;
 
-public interface Storage<Klass, I> {
+public interface Storage<С, I> {
 
-    Klass save(Klass entity);
+    С save(С entity);
 
-    Optional<Klass> get(I id);
+    Optional<С> get(I id);
 
-    Klass update(Klass entity);
+    С update(С entity);
 
-    Klass delete(I id);
+    С delete(I id);
 
-    List<Klass> getAll();
+    List<С> getAll();
 
 }
