@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -44,13 +43,4 @@ public class User {
     public void removeFriend(User friend) {
         friends.remove(friend);
     }
-
-//    public User(long id, String email, String login, String name, LocalDate birthday, Set<User> friends) {
-//        this.id = id;
-//        this.email = email;
-//        this.login = login;
-//        this.name = name;
-//        this.birthday = birthday;
-//        this.friends = new HashSet<>();
-//    }
 }
