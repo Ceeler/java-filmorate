@@ -27,4 +27,10 @@ public class ConstraintControllerAdvice {
         }
         return new ResponseEntity<>(Collections.singletonList(new Message(e.getMessage())), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Message> onIllegalArgumentException(IllegalArgumentException e) {
+        log.warn("Ошибка в аргументах запроса", e);
+        return new ResponseEntity<>(new Message(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
 }
