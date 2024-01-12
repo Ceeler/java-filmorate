@@ -6,7 +6,7 @@ import ru.yandex.practicum.filmorate.model.entity.Film;
 import java.util.*;
 
 @Component
-public class InMemoryFilmStorage implements FilmStorage{
+public class InMemoryFilmStorage implements FilmStorage {
 
     Map<Long, Film> store;
 
