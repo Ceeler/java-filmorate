@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.storage.film;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.entity.Film;
+import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
 
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class InMemoryFilmStorage implements FilmStorage {
         final long id = entity.getId();
         Film film = store.get(id);
         if (film == null) {
-            throw new IllegalArgumentException();
+            throw new NotFoundException("Фильм с ID=" + id + " не найден");
         }
         store.put(id, entity);
         return entity;
@@ -45,7 +46,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     public Film delete(Long id) {
         Film film = store.get(id);
         if (film == null) {
-            throw new IllegalArgumentException();
+            throw new NotFoundException("Фильм с ID=" + id + " не найден");
         }
         store.remove(id);
         return film;

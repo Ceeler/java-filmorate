@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.Film;
 import ru.yandex.practicum.filmorate.model.entity.User;
-import ru.yandex.practicum.filmorate.model.storage.film.FilmStorage;
+import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class FilmService {
 
     public Film getFilmById(long id) {
         Film film = filmStorage.get(id).orElseThrow(
-                () -> new IllegalArgumentException("Фильм с ID=" + id + "не найден"));
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         return film;
     }
 
@@ -54,7 +55,7 @@ public class FilmService {
 
     public void addLike(Long id, Long userId) {
         Film film = filmStorage.get(id).orElseThrow(
-                () -> new IllegalArgumentException("Фильм с ID=" + id + "не найден"));
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         User user = userService.getUserById(userId);
         film.addLike(user);
         filmStorage.update(film);
@@ -62,7 +63,7 @@ public class FilmService {
 
     public void removeLike(Long id, Long userId) {
         Film film = filmStorage.get(id).orElseThrow(
-                () -> new IllegalArgumentException("Фильм с ID=" + id + "не найден"));
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         User user = userService.getUserById(userId);
         film.removeLike(user);
         filmStorage.update(film);
