@@ -61,12 +61,9 @@ public class FilmController {
 
     @DeleteMapping("/{id}/like/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Message deleteLike(@PathVariable long id, @PathVariable long userId) {
+    public void deleteLike(@PathVariable long id, @PathVariable long userId) {
         log.info("Пришел Delete запрос /films/{}/like/{}", id, userId);
         filmService.removeLike(id, userId);
-        Message response = new Message("Успешно!");
-        log.info("Отправлен ответ Delete /films/{}/like/{}", id, userId, response);
-        return response;
     }
 
     @GetMapping("/popular")
