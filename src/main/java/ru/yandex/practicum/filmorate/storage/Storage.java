@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.model.storage;
+package ru.yandex.practicum.filmorate.storage;
 
 import java.util.List;
 import java.util.Optional;

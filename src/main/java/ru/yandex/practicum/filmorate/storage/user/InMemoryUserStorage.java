@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.model.storage.user;
+package ru.yandex.practicum.filmorate.storage.user;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.entity.User;
@@ -7,7 +7,7 @@ import java.util.*;
 
 @Component
 public class InMemoryUserStorage implements UserStorage {
-    Map<Long, User> store;
+    private final Map<Long, User> store;
 
     private long idSequence = 1;
 

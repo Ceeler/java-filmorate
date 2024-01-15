@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.model.storage.film;
+package ru.yandex.practicum.filmorate.storage.film;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.entity.Film;
@@ -8,7 +8,7 @@ import java.util.*;
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
 
-    Map<Long, Film> store;
+    private final Map<Long, Film> store;
 
     private long idSequence = 1;
 
