@@ -1,14 +1,15 @@
 package ru.yandex.practicum.filmorate.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -25,10 +26,21 @@ public class User {
     @Pattern(regexp = "^[a-zA-Z]{4,16}$", message = "Некорректный никнейм")
     private String login;
 
-
     private String name;
 
     @Past(message = "День рождения не может быть в будущей дате")
     private LocalDate birthday;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<User> friends = new LinkedHashSet<>();
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public void removeFriend(User friend) {
+        friends.remove(friend);
+    }
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.validation.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ class FilmTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.film = new Film(0,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124);
+        this.film = new Film(0,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124, new HashSet<>());
     }
 
     @Test

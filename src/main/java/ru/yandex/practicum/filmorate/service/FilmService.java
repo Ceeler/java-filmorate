@@ -1,58 +1,79 @@
 package ru.yandex.practicum.filmorate.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.Film;
+import ru.yandex.practicum.filmorate.model.entity.User;
+import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
+import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class FilmService {
 
     private static final LocalDate MIN_FILM_DATE = LocalDate.of(1895, 12, 28);
 
-    private final Map<Long, Film> films = new HashMap<>();
+    private static final int DEFAULT_FILM_COUNT = 10;
 
-    private long filmSequence = 1;
+    private final FilmStorage filmStorage;
 
+    private final UserService userService;
 
     public Film getFilmById(long id) {
-        Film film = films.get(id);
-        if (film == null) {
-            throw new IllegalArgumentException();
-        }
+        Film film = filmStorage.get(id).orElseThrow(
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         return film;
     }
 
     public List<Film> getFilms() {
-        return new ArrayList<>(films.values());
+        return filmStorage.getAll();
     }
 
     public Film addFilm(Film film) {
         log.info("addFilm film={}", film);
-        final long id = filmSequence++;
         if (MIN_FILM_DATE.isAfter(film.getReleaseDate())) {
             throw new ConstraintViolationException("Фильм не может быть создан раньше 28 декабря 1895 года", null);
         }
-        film.setId(id);
-        films.put(id, film);
-        return film;
+        return filmStorage.save(film);
     }
 
     public Film updateFilm(Film film) {
         log.info("updateFilm film={}", film);
-        final long id = film.getId();
         if (MIN_FILM_DATE.isAfter(film.getReleaseDate())) {
             throw new ConstraintViolationException("Фильм не может быть создан раньше 28 декабря 1895 года", null);
         }
-        if (!films.containsKey(id)) {
-            throw new IllegalArgumentException();
-        }
-        films.put(id, film);
-        return film;
+        Film response = filmStorage.update(film);
+        return response;
     }
 
+    public void addLike(Long id, Long userId) {
+        Film film = filmStorage.get(id).orElseThrow(
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
+        User user = userService.getUserById(userId);
+        film.addLike(user);
+        filmStorage.update(film);
+    }
+
+    public void removeLike(Long id, Long userId) {
+        Film film = filmStorage.get(id).orElseThrow(
+                () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
+        User user = userService.getUserById(userId);
+        film.removeLike(user);
+        filmStorage.update(film);
+    }
+
+    public List<Film> getTopByLike(Integer count) {
+        List<Film> films = filmStorage.getAll().stream()
+                .sorted((film1, film2) -> Integer.compare(film2.getLikes().size(), film1.getLikes().size()))
+                .limit(count == null ? DEFAULT_FILM_COUNT : count)
+                .collect(Collectors.toList());
+        return films;
+    }
 }
