@@ -23,6 +23,7 @@ import java.util.*;
 public class DbFilmStorage implements FilmStorage {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
+
     @Override
     public Film save(Film entity) {
         String sql = "INSERT INTO films (name, description, release_date, duration, mpa_id) " +
@@ -159,10 +160,10 @@ public class DbFilmStorage implements FilmStorage {
         for (Genre genre : genresId) {
             final int genreId = genre.getId();
             sqlBuilder.append("(:film_id, :genre").append(i).append("),");
-            parameterSource.addValue("genre"+i, genreId);
+            parameterSource.addValue("genre" + i, genreId);
             i++;
         }
-        sqlBuilder.deleteCharAt(sqlBuilder.length()-1);
+        sqlBuilder.deleteCharAt(sqlBuilder.length() - 1);
         String sql = sqlBuilder.toString();
 
         jdbcTemplate.update(sql, parameterSource);
