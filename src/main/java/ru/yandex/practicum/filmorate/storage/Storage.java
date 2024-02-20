@@ -11,7 +11,7 @@ public interface Storage<T, K> {
 
     T update(T entity);
 
-    T delete(K id);
+    void delete(K id);
 
     List<T> getAll();
 

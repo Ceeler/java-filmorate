@@ -20,7 +20,7 @@ class FilmTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.film = new Film(0,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2), 124, new HashSet<>());
+        this.film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(124, "G"), new HashSet<>());
     }
 
     @Test
@@ -66,7 +66,4 @@ class FilmTest {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         assertEquals(3,  violations.size());
     }
-
-
-
 }
