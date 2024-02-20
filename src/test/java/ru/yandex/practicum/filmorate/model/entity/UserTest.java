@@ -23,7 +23,7 @@ class UserTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.user =  new User(1, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        this.user =  new User(1L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
     }
 
     @Test

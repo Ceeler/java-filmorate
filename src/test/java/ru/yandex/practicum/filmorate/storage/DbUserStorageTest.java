@@ -22,7 +22,7 @@ public class DbUserStorageTest {
 
     @Test
     public void testFindUserById() {
-        User user = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User user = new User(0L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();
@@ -38,8 +38,8 @@ public class DbUserStorageTest {
 
     @Test
     public void testUpdateUser() {
-        User user = new User(2, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
-        User newUser = new User(2, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
+        User user = new User(2L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User newUser = new User(2L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();
@@ -56,7 +56,7 @@ public class DbUserStorageTest {
 
     @Test
     public void testDeleteUser() {
-        User user = new User(3, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User user = new User(3L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();
@@ -68,8 +68,8 @@ public class DbUserStorageTest {
 
     @Test
     public void testAddFriend() {
-        User user = new User(4, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
-        User friend = new User(5, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
+        User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();
@@ -89,8 +89,8 @@ public class DbUserStorageTest {
 
     @Test
     public void testDeleteFriend() {
-        User user = new User(4, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
-        User friend = new User(5, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
+        User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();
@@ -108,9 +108,9 @@ public class DbUserStorageTest {
 
     @Test
     public void testCommonFriend() {
-        User user = new User(4, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
-        User user2 = new User(5, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
-        User friend = new User(5, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
+        User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        User user2 = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
+        User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
         Long id = userStorage.save(user).getId();

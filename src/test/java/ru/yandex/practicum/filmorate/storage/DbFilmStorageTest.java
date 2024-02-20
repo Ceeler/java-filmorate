@@ -24,7 +24,7 @@ public class DbFilmStorageTest {
 
     @Test
     public void testFindFilmById() {
-       Film film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
+       Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
 
         DbFilmStorage filmStorage = new DbFilmStorage(jdbcTemplate);
 
@@ -41,8 +41,8 @@ public class DbFilmStorageTest {
 
     @Test
     public void testUpdateFilm() {
-        Film film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
-        Film newFilm = new Film(0l,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
+        Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
+        Film newFilm = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
 
         DbFilmStorage filmStorage = new DbFilmStorage(jdbcTemplate);
 
@@ -61,7 +61,7 @@ public class DbFilmStorageTest {
 
     @Test
     public void testDeleteFilm() {
-        Film film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
+        Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
 
         DbFilmStorage filmStorage = new DbFilmStorage(jdbcTemplate);
 
@@ -77,8 +77,8 @@ public class DbFilmStorageTest {
 
     @Test
     public void testAddLike() {
-        Film film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
-        Film film2 = new Film(0l,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
+        Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
+        Film film2 = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
         User user = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
@@ -103,8 +103,8 @@ public class DbFilmStorageTest {
 
     @Test
     public void testRemoveLike() {
-        Film film = new Film(0l,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
-        Film film2 = new Film(0l,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
+        Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
+        Film film2 = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
         User user = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
         User user2 = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
