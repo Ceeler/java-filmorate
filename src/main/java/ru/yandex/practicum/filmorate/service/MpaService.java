@@ -25,5 +25,4 @@ public class MpaService {
     public List<Mpa> getMpa() {
         return mpaStorage.getAll();
     }
-
 }

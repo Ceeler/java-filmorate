@@ -29,6 +29,4 @@ public class GenreController {
         log.info("Отправлен ответ Get /genres с телом: {}", response);
         return ResponseEntity.ok(response);
     }
-
-
 }
