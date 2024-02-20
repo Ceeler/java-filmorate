@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Component("DbUserStorage")
 @AllArgsConstructor
-public class DbUserStorage implements UserStorage{
+public class DbUserStorage implements UserStorage {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
