@@ -28,7 +28,7 @@ public class DbGenreStorage implements Storage<Genre, Integer> {
         String sql = "SELECT * FROM genres WHERE id=:id";
         SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         List<Genre> genre = jdbcTemplate.query(sql, parameterSource, (rs, rowNum) -> mapRow(rs, rowNum));
-        if(genre.isEmpty()) {
+        if (genre.isEmpty()) {
             return Optional.empty();
         } else {
             return Optional.of(genre.get(0));
