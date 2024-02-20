@@ -28,7 +28,7 @@ public class DbMpaStorage implements Storage<Mpa, Integer> {
         String sql = "SELECT * FROM mpa WHERE id=:id";
         SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         List<Mpa> mpa = jdbcTemplate.query(sql, parameterSource, (rs, rowNum) -> mapRow(rs, rowNum));
-        if(mpa.isEmpty()) {
+        if (mpa.isEmpty()) {
             return Optional.empty();
         } else {
             return Optional.of(mpa.get(0));
