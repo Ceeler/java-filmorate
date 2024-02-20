@@ -45,9 +45,9 @@ public class DbUserStorage implements UserStorage{
 
         if (user.isEmpty()) {
             return Optional.empty();
-        } else {
-            return Optional.of(user.get(0));
-       }
+        }
+
+        return Optional.of(user.get(0));
     }
 
     @Override
