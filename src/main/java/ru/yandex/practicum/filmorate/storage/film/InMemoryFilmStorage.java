@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.storage.film;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.entity.Film;
+import ru.yandex.practicum.filmorate.model.entity.User;
 import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
 
 import java.util.*;
@@ -43,17 +44,32 @@ public class InMemoryFilmStorage implements FilmStorage {
     }
 
     @Override
-    public Film delete(Long id) {
+    public void delete(Long id) {
         Film film = store.get(id);
         if (film == null) {
             throw new NotFoundException("Фильм с ID=" + id + " не найден");
         }
         store.remove(id);
-        return film;
+        //return film;
     }
 
     @Override
     public List<Film> getAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void addLike(Film film, User user) {
+
+    }
+
+    @Override
+    public void removeLike(Film film, User user) {
+
+    }
+
+    @Override
+    public List<Film> getTopByLike(int count) {
+        return null;
     }
 }
