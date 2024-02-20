@@ -42,6 +42,7 @@ public class DbUserStorage implements UserStorage{
         String sql = "SELECT * FROM users WHERE id=:id";
         SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
         List<User> user = jdbcTemplate.query(sql, parameterSource, (rs, rowNum) -> mapRow(rs, rowNum));
+
         if (user.isEmpty()) {
             return Optional.empty();
         } else {
