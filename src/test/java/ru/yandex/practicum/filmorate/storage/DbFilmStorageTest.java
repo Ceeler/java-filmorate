@@ -23,7 +23,7 @@ public class DbFilmStorageTest {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Test
-    public void testFindFilmById() {
+    public void findFilmByIdShouldReturn1Film() {
        Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
 
         DbFilmStorage filmStorage = new DbFilmStorage(jdbcTemplate);
@@ -40,7 +40,7 @@ public class DbFilmStorageTest {
     }
 
     @Test
-    public void testUpdateFilm() {
+    public void updateFilmShouldReturnNewFilm() {
         Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
         Film newFilm = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
 
@@ -60,7 +60,7 @@ public class DbFilmStorageTest {
     }
 
     @Test
-    public void testDeleteFilm() {
+    public void deleteFilmShouldReturnNull() {
         Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
 
         DbFilmStorage filmStorage = new DbFilmStorage(jdbcTemplate);
@@ -76,7 +76,7 @@ public class DbFilmStorageTest {
     }
 
     @Test
-    public void testAddLike() {
+    public void addLikeShouldReturnFilm1() {
         Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
         Film film2 = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
         User user = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
@@ -102,7 +102,7 @@ public class DbFilmStorageTest {
     }
 
     @Test
-    public void testRemoveLike() {
+    public void removeLikeShouldReturnFilm2() {
         Film film = new Film(0L,"Титаник","Фильм о корабле", LocalDate.of(2023, 11, 2),124, new Mpa(1, "G"), new HashSet<>());
         Film film2 = new Film(0L,"newТитаник","newФильм о корабле", LocalDate.of(2024, 11, 2),224, new Mpa(2, "PG"), new HashSet<>());
         User user = new User(0, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());

@@ -21,7 +21,7 @@ public class DbUserStorageTest {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Test
-    public void testFindUserById() {
+    public void findUserByIdShouldReturnUser() {
         User user = new User(0L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
@@ -37,7 +37,7 @@ public class DbUserStorageTest {
     }
 
     @Test
-    public void testUpdateUser() {
+    public void updateUserShouldReturnNewUser() {
         User user = new User(2L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
         User newUser = new User(2L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
@@ -55,7 +55,7 @@ public class DbUserStorageTest {
     }
 
     @Test
-    public void testDeleteUser() {
+    public void deleteUserShouldReturnNull() {
         User user = new User(3L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
 
         DbUserStorage userStorage = new DbUserStorage(jdbcTemplate);
@@ -67,7 +67,7 @@ public class DbUserStorageTest {
     }
 
     @Test
-    public void testAddFriend() {
+    public void addFriendShouldReturnOneFriend() {
         User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
         User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
@@ -88,7 +88,7 @@ public class DbUserStorageTest {
     }
 
     @Test
-    public void testDeleteFriend() {
+    public void deleteFriendShouldReturnEmptyList() {
         User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
         User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
 
@@ -107,7 +107,7 @@ public class DbUserStorageTest {
     }
 
     @Test
-    public void testCommonFriend() {
+    public void commonFriendShouldReturnOneFriend() {
         User user = new User(4L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
         User user2 = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());
         User friend = new User(5L, "newlosev@danil-m.ru", "newCeeler", "newДанил", LocalDate.of(1999, 12, 13), new HashSet<>());

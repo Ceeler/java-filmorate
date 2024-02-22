@@ -50,7 +50,6 @@ public class InMemoryFilmStorage implements FilmStorage {
             throw new NotFoundException("Фильм с ID=" + id + " не найден");
         }
         store.remove(id);
-        //return film;
     }
 
     @Override

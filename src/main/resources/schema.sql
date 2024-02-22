@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS films(
     release_date DATE,
     duration     INTEGER,
     mpa_id       INTEGER,
---    mpa          ENUM('G', 'PG', 'PG_13', 'R', 'NC_17'),
     FOREIGN KEY (mpa_id) REFERENCES mpa (id),
     CONSTRAINT films_check_name_not_blank CHECK (name <> ''),
     CONSTRAINT films_check_positive_duration CHECK (duration > 0),
