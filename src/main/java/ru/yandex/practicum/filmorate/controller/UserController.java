@@ -11,7 +11,6 @@ import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -69,18 +68,18 @@ public class UserController {
 
     @GetMapping("/{id}/friends")
     @ResponseStatus(HttpStatus.OK)
-    public Set<User> getFriends(@PathVariable long id) {
+    public List<User> getFriends(@PathVariable long id) {
         log.info("Пришел Get запрос /users/{}/friends", id);
-        Set<User> response = userService.getUserFriends(id);
+        List<User> response = userService.getUserFriends(id);
         log.info("Отправлен ответ Get /users/{}/friends c телом {}", id, response);
         return response;
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
     @ResponseStatus(HttpStatus.OK)
-    public Set<User> getCommonFriends(@PathVariable long id, @PathVariable long otherId) {
+    public List<User> getCommonFriends(@PathVariable long id, @PathVariable long otherId) {
         log.info("Пришел Get запрос /users/{}/friends/common/{}", id, otherId);
-        Set<User> response = userService.getUserCommonFriend(id, otherId);
+        List<User> response = userService.getUserCommonFriend(id, otherId);
         log.info("Отправлен ответ Put /users/{}/friends/common/{} c телом {}", id, otherId, response);
         return response;
     }

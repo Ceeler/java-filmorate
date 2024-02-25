@@ -6,7 +6,7 @@ import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
 
 import java.util.*;
 
-@Component
+@Component("InMemoryUserStorage")
 public class InMemoryUserStorage implements UserStorage {
     private final Map<Long, User> store;
 
@@ -42,17 +42,37 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public User delete(Long id) {
+    public void delete(Long id) {
         User user = store.get(id);
         if (user == null) {
             throw new NotFoundException("Пользователь с ID=" + id + " не найден");
         }
         store.remove(id);
-        return user;
+        //return user;
     }
 
     @Override
     public List<User> getAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void addFriend(User user, User friend) {
+
+    }
+
+    @Override
+    public List<User> getFriendsByUser(User user) {
+        return null;
+    }
+
+    @Override
+    public void deleteFriend(User user, User friend) {
+
+    }
+
+    @Override
+    public List<User> getUserCommonFriend(User user, User otherUser) {
+        return null;
     }
 }

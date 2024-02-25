@@ -1,7 +1,7 @@
 package ru.yandex.practicum.filmorate.service;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.entity.Film;
 import ru.yandex.practicum.filmorate.model.entity.User;
@@ -11,11 +11,9 @@ import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@AllArgsConstructor
 public class FilmService {
 
     private static final LocalDate MIN_FILM_DATE = LocalDate.of(1895, 12, 28);
@@ -25,6 +23,12 @@ public class FilmService {
     private final FilmStorage filmStorage;
 
     private final UserService userService;
+
+    public FilmService(@Qualifier("DbFilmStorage") FilmStorage filmStorage,
+                       UserService userService) {
+        this.filmStorage = filmStorage;
+        this.userService = userService;
+    }
 
     public Film getFilmById(long id) {
         Film film = filmStorage.get(id).orElseThrow(
@@ -46,9 +50,13 @@ public class FilmService {
 
     public Film updateFilm(Film film) {
         log.info("updateFilm film={}", film);
+        filmStorage.get(film.getId()).orElseThrow(
+                () -> new NotFoundException("Фильм с ID=" + film.getId() + "не найден"));
+
         if (MIN_FILM_DATE.isAfter(film.getReleaseDate())) {
             throw new ConstraintViolationException("Фильм не может быть создан раньше 28 декабря 1895 года", null);
         }
+
         Film response = filmStorage.update(film);
         return response;
     }
@@ -57,23 +65,18 @@ public class FilmService {
         Film film = filmStorage.get(id).orElseThrow(
                 () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         User user = userService.getUserById(userId);
-        film.addLike(user);
-        filmStorage.update(film);
+        filmStorage.addLike(film, user);
     }
 
     public void removeLike(Long id, Long userId) {
         Film film = filmStorage.get(id).orElseThrow(
                 () -> new NotFoundException("Фильм с ID=" + id + "не найден"));
         User user = userService.getUserById(userId);
-        film.removeLike(user);
-        filmStorage.update(film);
+        filmStorage.removeLike(film, user);
     }
 
     public List<Film> getTopByLike(Integer count) {
-        List<Film> films = filmStorage.getAll().stream()
-                .sorted((film1, film2) -> Integer.compare(film2.getLikes().size(), film1.getLikes().size()))
-                .limit(count == null ? DEFAULT_FILM_COUNT : count)
-                .collect(Collectors.toList());
+        List<Film> films = filmStorage.getTopByLike(count == null ? DEFAULT_FILM_COUNT : count);
         return films;
     }
 }

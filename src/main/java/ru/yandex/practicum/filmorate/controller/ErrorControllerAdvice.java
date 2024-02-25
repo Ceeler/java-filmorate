@@ -2,9 +2,9 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.yandex.practicum.filmorate.model.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.response.Message;
 
@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class ErrorControllerAdvice {
 
-    @ExceptionHandler(ConstraintViolationException.class)
+    @ExceptionHandler({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<Message> onConstraintException(ConstraintViolationException e) {
         log.warn("Ошибка валидации", e);
@@ -30,14 +30,14 @@ public class ErrorControllerAdvice {
         return Collections.singletonList(new Message(e.getMessage()));
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Message onNotFoundException(NotFoundException e) {
         log.warn("404 {}", e.getMessage());
         return new Message(e.getMessage());
     }
 
-    @ExceptionHandler
+    @ExceptionHandler({RuntimeException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Message handleThrowable(final Throwable e) {
         log.warn("500 {}", e.getMessage());

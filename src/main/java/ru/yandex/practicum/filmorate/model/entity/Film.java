@@ -1,21 +1,22 @@
 package ru.yandex.practicum.filmorate.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Film.
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Film {
     private long id;
 
@@ -30,15 +31,7 @@ public class Film {
     @Positive
     private Integer duration;
 
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude
-    private Set<User> likes = new LinkedHashSet<>();
+    private Mpa mpa;
 
-    public void addLike(User user) {
-        likes.add(user);
-    }
-
-    public void removeLike(User user) {
-        likes.remove(user);
-    }
+    private Set<Genre> genres = new TreeSet<>(Comparator.comparingInt(Genre::getId));
 }

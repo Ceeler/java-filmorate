@@ -23,7 +23,7 @@ class UserTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.user =  new User(1, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
+        this.user =  new User(1L, "losev@danil-m.ru", "Ceeler", "Данил", LocalDate.of(1999, 11, 13), new HashSet<>());
     }
 
     @Test
@@ -60,11 +60,6 @@ class UserTest {
         assertEquals(1,  violations.size());
     }
 
-//    @Test
-//    public void shouldUseLoginOnEmptyName() {
-//        User user1 = new User("losev@danil-m.ru", "Ceeler", LocalDate.of(1999, 11, 13));
-//        assertEquals("Ceeler",  user1.getName());
-//    }
 
     @Test
     public void shouldHaveOneViolationOnFutureBirthday() {
